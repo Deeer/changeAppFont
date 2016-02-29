@@ -7,7 +7,7 @@
 ![weibo](http://7xjg07.com1.z0.glb.clouddn.com/fontC476E237-33CF-47CD-8979-12AD0CF49536.png)
 
 ####说明
-通过以上三组图片我们可以看到一些特点
+通过以上三组图片我们可以看到以下特点
 
 -1.在顶部导航栏这里文字大小，图标大小并没有随着字体大小设置的改变而改变。
 
@@ -26,16 +26,16 @@ Textkit是基于coreText的一个强大的文本渲染框架。现今所有与�
 
 		
 	//目前iOS中有一下Style
-	UIKIT_EXTERN NSString *const UIFontTextStyleTitle1 NS_AVAILABLE_IOS(9_0);
-	UIKIT_EXTERN NSString *const UIFontTextStyleTitle2 NS_AVAILABLE_IOS(9_0);
-	UIKIT_EXTERN NSString *const UIFontTextStyleTitle3 NS_AVAILABLE_IOS(9_0);
-	UIKIT_EXTERN NSString *const UIFontTextStyleCallout NS_AVAILABLE_IOS(9_0);
-	UIKIT_EXTERN NSString *const UIFontTextStyleHeadline NS_AVAILABLE_IOS(7_0);
-	UIKIT_EXTERN NSString *const UIFontTextStyleSubheadline NS_AVAILABLE_IOS(7_0);
-	UIKIT_EXTERN NSString *const UIFontTextStyleBody NS_AVAILABLE_IOS(7_0);
-	UIKIT_EXTERN NSString *const UIFontTextStyleFootnote NS_AVAILABLE_IOS(7_0);
-	UIKIT_EXTERN NSString *const UIFontTextStyleCaption1 NS_AVAILABLE_IOS(7_0);
-	UIKIT_EXTERN NSString *const UIFontTextStyleCaption2 NS_AVAILABLE_IOS(7_0);
+	UIFontTextStyleTitle1 
+	UIFontTextStyleTitle2 
+	UIFontTextStyleTitle3 
+	UIFontTextStyleCallout 
+	UIFontTextStyleHeadline 
+	UIFontTextStyleSubheadline 
+	UIFontTextStyleBody 
+	UIFontTextStyleFootnote 
+	UIFontTextStyleCaption1 
+	UIFontTextStyleCaption2 
 
 
 ####UIFontDescriptor 
@@ -50,6 +50,23 @@ UIFontDescriptor也是随着iOS7推出的，它用于描述字体的属性，比
 我们使用Text style来创建了一个对应的UIFontDescriptor实例。然后使用fontDescriptorWithSymbilicTraits:方法返回一个与上面的bodyFontDesciptor相同特点同时还具有指定特点的一个UIFontDescriptor实例。最后使用fontWithDescriptor:size:方法获得对应的字体。但是并不需要设置大小，所以返回size参数设置为0.0。那么返回的字体大小就取决于原先的设置。
 
 ####在app中修改字体样式的相关思路
+
+1.设置界面中
+
+![setting](http://7xjg07.com1.z0.glb.clouddn.com/fontA0B5C748-F487-4EC2-9BBB-5DB53BB7C4B0.png)
+
+图中有7个档位，在iOS中分别代表7个Content size
+
+	 UIContentSizeCategoryExtraSmall 
+	 UIContentSizeCategorySmall 
+	 UIContentSizeCategoryMedium 
+	 UIContentSizeCategoryLarge 
+	 UIContentSizeCategoryExtraLarge 
+	 UIContentSizeCategoryExtraExtraLarge 
+	 UIContentSizeCategoryExtraExtraExtraLarge 
+
+每个Content size都对应有不同的style。每个style在都对应的font。
+所以我们在修改字体大小的时候会基于两种情况：1.基于当前手机本身的默认字体大小进行修改 2.自己定义一个默认的初始值。两者的出发点都是一样的，要有一个初始值作为标准。之后我们就需要对这个默认值进行修改,我们可以通过设置修改量的多少来设定字体的大小
 
 
 
